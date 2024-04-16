@@ -1,5 +1,6 @@
 package com.practice.ahub.model;
 
+import com.practice.ahub.validation.PasswordConstraint;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +29,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     @NotBlank
+    @PasswordConstraint
     private String password;
     @NotBlank
     private String name;
