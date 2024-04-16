@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: ahub
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: petya
+    password: postgres
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+  security:
+    oauth2:
+      authorizationserver:
+        endpoint:
+          authorization-uri: login
