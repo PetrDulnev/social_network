@@ -19,3 +19,5 @@ spring:
       authorizationserver:
         endpoint:
           authorization-uri: login
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration

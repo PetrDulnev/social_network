@@ -19,8 +19,9 @@ public class UserController {
 
     @PostMapping("/registration")
     @PermitAll
-    public User createUser(@Valid @RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<Void> createUser(@Valid @RequestBody User user) {
+        userService.createUser(user);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
