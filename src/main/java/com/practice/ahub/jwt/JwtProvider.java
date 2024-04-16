@@ -1,25 +1,20 @@
 package com.practice.ahub.jwt;
 
 
-import com.practice.ahub.model.Role;
 import com.practice.ahub.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.JwtVisitor;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
-import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -49,7 +44,7 @@ public class JwtProvider {
 
     public String getRolesFromToken(String token) {
         Claims claimsFromToken = getClaimsFromToken(token);
-        return (String) ((HashMap) claimsFromToken.get("role", ArrayList.class).get(0)).get("authority");
+        return (String) ((HashMap<?, ?>) claimsFromToken.get("role", ArrayList.class).get(0)).get("authority");
     }
 
     public Claims getClaimsFromToken(String token) {

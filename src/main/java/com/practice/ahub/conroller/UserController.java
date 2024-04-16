@@ -3,13 +3,11 @@ package com.practice.ahub.conroller;
 import com.practice.ahub.jwt.JwtRequest;
 import com.practice.ahub.jwt.JwtResponse;
 import com.practice.ahub.model.User;
-import com.practice.ahub.model.UserProfile;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.practice.ahub.service.UserService;
 
