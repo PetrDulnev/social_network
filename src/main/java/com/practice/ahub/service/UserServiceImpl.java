@@ -1,5 +1,6 @@
 package com.practice.ahub.service;
 
+import com.practice.ahub.exception.CustomException;
 import com.practice.ahub.jwt.JwtRequest;
 import com.practice.ahub.jwt.JwtResponse;
 import com.practice.ahub.jwt.JwtService;
@@ -11,9 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +43,7 @@ public class UserServiceImpl implements UserService {
         )) {
             return jwtService.generateToken(user);
         } else {
-            throw new UsernameNotFoundException("User not found with username: " + request.getEmail());
+            throw new CustomException("You entered the wrong password");
         }
     }
 

@@ -1,12 +1,17 @@
 package com.practice.ahub.jwt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.practice.ahub.exception.ExceptionResponse;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -47,9 +52,21 @@ public class JwtFilter extends GenericFilterBean {
                 }
             }
             filterChain.doFilter(servletRequest, servletResponse);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (JwtException e) {
+            setErrorResponse((HttpServletResponse) servletResponse, e);
+            throw new JwtException(e.getMessage());
         }
 
+    }
+
+
+    private void setErrorResponse(HttpServletResponse response, JwtException jwtException) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setContentType("application/json");
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                true, jwtException.getMessage()
+        );
+        response.getWriter().write(objectMapper.writeValueAsString(exceptionResponse));
     }
 }

@@ -24,6 +24,11 @@ public class SecurityConfiguration {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(
+                        exception -> exception.accessDeniedPage(
+                                "/error/403"
+                        )
+                )
                 .build();
     }
 
