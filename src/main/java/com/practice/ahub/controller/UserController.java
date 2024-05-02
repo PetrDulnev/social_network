@@ -1,15 +1,15 @@
-package com.practice.ahub.conroller;
+package com.practice.ahub.controller;
 
 import com.practice.ahub.jwt.JwtRequest;
 import com.practice.ahub.jwt.JwtResponse;
 import com.practice.ahub.model.User;
+import com.practice.ahub.service.UserService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-import com.practice.ahub.service.UserService;
 
 @RestController
 @RequestMapping("/ahub/users")
@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping("/login")
     @PermitAll
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
-        return userService.login(request);
+        return ResponseEntity.ok(userService.login(request));
     }
 
     @GetMapping("/log")
