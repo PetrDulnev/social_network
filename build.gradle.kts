@@ -22,6 +22,8 @@ repositories {
 }
 
 dependencies {
+	testImplementation("org.testcontainers:testcontainers:1.19.7")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
 	implementation("org.springframework.security:spring-security-oauth2-core:6.2.3")
 	implementation("io.jsonwebtoken:jjwt-api:0.12.5")
 	implementation("org.springframework.boot:spring-boot-starter-security")

@@ -1,6 +1,7 @@
 package com.practice.ahub.jwt;
 
 
+import com.practice.ahub.exception.CustomException;
 import com.practice.ahub.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
@@ -28,7 +29,7 @@ public class JwtProvider {
     public String generateToken(User user) {
         LocalDateTime dateTime = LocalDateTime.now();
         Date issue = Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
-        Date exp = Date.from(dateTime.plusMinutes(1000).atZone(ZoneId.systemDefault()).toInstant());
+        Date exp = Date.from(dateTime.plusSeconds(30).atZone(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .signWith(key)
                 .issuedAt(issue)
@@ -54,6 +55,11 @@ public class JwtProvider {
 
     public boolean isValidToken (String token) {
         Date deadTime = getClaimsFromToken(token).getExpiration();
-        return (token != null) || !deadTime.before(new Date(System.currentTimeMillis()));
+        if ((token != null) && !deadTime.before(new Date(System.currentTimeMillis())))
+        {
+            return true;
+        } else {
+            throw new CustomException("Expired or invalid JWT token");
+        }
     }
 }
