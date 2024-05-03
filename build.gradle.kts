@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+	implementation("io.minio:minio:8.5.10")
 	testImplementation("org.testcontainers:testcontainers:1.19.7")
 	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
 	implementation("org.springframework.security:spring-security-oauth2-core:6.2.3")

@@ -6,8 +6,6 @@ import com.practice.ahub.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public interface UserService {
 

@@ -21,3 +21,8 @@ spring:
           authorization-uri: login
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+minio:
+  accessKey: petya
+  secretKey: Minio123
+  url: http://localhost:9000
