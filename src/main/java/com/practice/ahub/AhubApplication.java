@@ -1,10 +1,12 @@
 package com.practice.ahub;
 
+import com.practice.ahub.properties.MinioProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
+@EnableConfigurationProperties(MinioProperties.class)
 public class AhubApplication {
 
 	public static void main(String[] args) {

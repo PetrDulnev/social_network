@@ -29,7 +29,7 @@ public class JwtProvider {
     public String generateToken(User user) {
         LocalDateTime dateTime = LocalDateTime.now();
         Date issue = Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
-        Date exp = Date.from(dateTime.plusSeconds(30).atZone(ZoneId.systemDefault()).toInstant());
+        Date exp = Date.from(dateTime.plusDays(30).atZone(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .signWith(key)
                 .issuedAt(issue)

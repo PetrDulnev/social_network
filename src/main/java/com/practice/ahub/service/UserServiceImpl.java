@@ -6,6 +6,8 @@ import com.practice.ahub.jwt.JwtResponse;
 import com.practice.ahub.jwt.JwtService;
 import com.practice.ahub.model.Role;
 import com.practice.ahub.model.User;
+import com.practice.ahub.model.UserProfile;
+import com.practice.ahub.repository.UserProfileRepository;
 import com.practice.ahub.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +22,18 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final UserProfileRepository profileRepository;
 
     @Override
     public User createUser(User user) {
         user.setPassword(cryptPassword(user.getPassword()));
         user.setRole(Role.USER);
-        return userRepository.save(user);
+        User savedUSer = userRepository.save(user);
+        UserProfile profile = UserProfile.builder()
+                .user(user)
+                .build();
+        profileRepository.save(profile);
+        return savedUSer;
     }
 
     @Override
