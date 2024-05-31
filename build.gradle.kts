@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
 	implementation("io.minio:minio:8.5.10")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	testImplementation("org.testcontainers:testcontainers:1.19.7")
 	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
 	implementation("org.springframework.security:spring-security-oauth2-core:6.2.3")
@@ -34,11 +35,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.liquibase:liquibase-core")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 }
 
 tasks.withType<Test> {
