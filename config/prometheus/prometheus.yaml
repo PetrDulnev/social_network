@@ -1,0 +1,14 @@
+scrape_configs:
+  - job_name:
+      "prometheus"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["localhost:8080"]
+
+  - job_name: "app-in"
+    metrics_path: /actuator/prometheus
+    scrape_interval: 2s
+    static_configs:
+      - targets: ["localhost:8080"]
+        labels:
+          application: "SocialNetwork"
