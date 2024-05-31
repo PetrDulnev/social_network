@@ -1,0 +1,48 @@
+services:
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - backnet
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./config/prometheus:/etc/prometheus/
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+    network_mode: service:grafana
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - 3000:3000
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - grafana:/data
+    network_mode: host
+
+
+
+
+networks:
+  backnet:
+    driver: bridge
+  monitoring:
+    driver: bridge
+
+volumes:
+  postgres:
+  grafana:
