@@ -31,3 +31,7 @@ minio:
 
 server:
   port: 8080
+
+springdoc:
+  api-docs:
+    path: /api-doc
