@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
 
+
     @PostMapping("/registration")
     @PermitAll
     public ResponseEntity<Void> createUser(@Valid @RequestBody User user) {
