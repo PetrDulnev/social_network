@@ -1,16 +1,17 @@
 package com.practice.ahub.modelDto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Value;
 
-@Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserDto {
-    private String email;
-    private String surName;
-    private String name;
+import java.io.Serializable;
+
+/**
+ * DTO for {@link com.practice.ahub.model.User}
+ */
+@Value
+public class UserDto implements Serializable {
+    @NotBlank
+    String name;
+    @NotBlank
+    String surname;
 }

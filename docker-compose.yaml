@@ -6,6 +6,7 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+      POSTGRES_DB: social
     volumes:
       - postgres:/data/postgres
     ports:

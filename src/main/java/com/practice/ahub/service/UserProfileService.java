@@ -65,4 +65,11 @@ public class UserProfileService {
     }
 
 
+    public UserProfile getbyemail(String email) {
+        return userProfileRepository.findByUserEmail(email);
+    }
+
+    public UserProfile getByLink(String link) {
+        return userProfileRepository.findByLink(link);
+    }
 }

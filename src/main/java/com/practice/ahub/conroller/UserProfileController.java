@@ -3,6 +3,7 @@ package com.practice.ahub.conroller;
 import com.practice.ahub.model.UserProfile;
 import com.practice.ahub.service.FileModelService;
 import com.practice.ahub.service.UserProfileService;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -38,4 +39,15 @@ public class UserProfileController {
         return profileService.updateUserProfile(principal, userProfile);
     }
 
+    @GetMapping
+    @PermitAll
+    public  UserProfile getByEmail(@RequestParam(value = "email") String email){
+        return profileService.getbyemail(email);
+    }
+
+    @GetMapping("/{link}")
+    @PermitAll
+    public UserProfile getByLink(@PathVariable String link){
+        return profileService.getByLink(link);
+    }
 }
