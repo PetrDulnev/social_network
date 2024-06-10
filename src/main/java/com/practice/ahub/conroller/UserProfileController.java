@@ -4,6 +4,7 @@ import com.practice.ahub.model.UserProfile;
 import com.practice.ahub.service.FileModelService;
 import com.practice.ahub.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,4 +39,11 @@ public class UserProfileController {
         return profileService.updateUserProfile(principal, userProfile);
     }
 
+    @GetMapping
+    public Page<UserProfile> getAllUsers(@RequestParam(defaultValue = "0") Integer page,
+                                         @RequestParam(defaultValue = "5") Integer size,
+                                         @RequestParam(defaultValue = "id") String sortBy,
+                                         @RequestParam(required = false) String name) {
+        return profileService.getAllUsers(page, size, sortBy, name);
+    }
 }
