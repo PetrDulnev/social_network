@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class UserProfileService {
+public class  UserProfileService {
 
     private final UserProfileRepository userProfileRepository;
     private final FileModelRepository fileModelRepository;

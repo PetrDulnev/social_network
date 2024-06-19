@@ -6,6 +6,8 @@ import com.practice.ahub.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public interface UserService {
 
@@ -14,4 +16,6 @@ public interface UserService {
     User loadUserByUsername(String username);
 
     ResponseEntity<JwtResponse> login(JwtRequest request);
+
+    Optional<User> getById(long id);
 }

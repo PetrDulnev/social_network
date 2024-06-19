@@ -1,12 +1,11 @@
 package com.practice.ahub.repository;
 
 import com.practice.ahub.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository {
+    User getById(int id);
+    User save(User user);
     Optional<User> findByEmail(String email);
 }
