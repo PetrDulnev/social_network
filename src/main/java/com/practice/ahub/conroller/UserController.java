@@ -1,27 +1,30 @@
 package com.practice.ahub.conroller;
 
-import com.practice.ahub.exception.CustomException;
 import com.practice.ahub.jwt.JwtRequest;
 import com.practice.ahub.jwt.JwtResponse;
-import com.practice.ahub.model.Role;
 import com.practice.ahub.model.User;
 import com.practice.ahub.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@Slf4j
+@Api(value = "UserController", hidden = true)
 public class UserController {
     private final UserService userService;
 
     @PostMapping("/registration")
     @PermitAll
+    @ApiOperation(value = "Create new user", notes = "Create new User and automatically create userprofile")
     public ResponseEntity<Void> createUser(@Valid @RequestBody User user) {
         userService.createUser(user);
         return ResponseEntity.ok().build();
@@ -31,31 +34,5 @@ public class UserController {
     @PermitAll
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
         return userService.login(request);
-    }
-
-    @GetMapping(("/{id}"))
-    public User getUser(@PathVariable Long id) {
-
-        return userService.getById(id).orElseThrow(
-                () -> new CustomException(
-                        String.format("user with id = %s not found", id)
-                )
-        );
-    }
-
-    @PostMapping("/create/million")
-    public void createMillionUsers() {
-        for (int i = 0; i < 1000; i++) {
-            userService.createUser(
-                    new User(
-                            null,
-                            "asd" + i + "@mail.ru",
-                            "asdassddas",
-                            "asdsad",
-                            "asdsda",
-                            Role.USER
-                    )
-            );
-        }
     }
 }

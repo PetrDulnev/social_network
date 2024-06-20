@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.USER);
         User savedUSer = userRepository.save(user);
         UserProfile profile = UserProfile.builder()
+                .link(String.valueOf(savedUSer.getId()))
                 .user(user)
                 .build();
         profileRepository.save(profile);

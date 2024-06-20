@@ -12,6 +12,15 @@ import java.util.List;
 @Setter
 @Table(name = "users_profile")
 @Builder
+@NamedEntityGraph(
+        name = "UserProfile.eagerlyFetchUser",
+        attributeNodes = {
+                @NamedAttributeNode("user"),
+                @NamedAttributeNode("profileImage"),
+                @NamedAttributeNode("bannerImage"),
+                @NamedAttributeNode("allImages")
+        }
+)
 public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

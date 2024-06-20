@@ -5,10 +5,10 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/social
     username: admin
     password: admin
   security:
@@ -31,3 +31,8 @@ minio:
 
 server:
   port: 8080
+
+
+springdoc:
+  api-docs:
+    path: /api-doc
