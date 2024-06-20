@@ -14,7 +14,6 @@ import java.util.Optional;
 public class UserJdbcRepository implements UserRepository {
 
     private final JdbcTemplate jdbcTemplate;
-//    private final BeanPropertyRowMapper<User> userRowMapper;
 
     public UserJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

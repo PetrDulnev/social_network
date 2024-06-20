@@ -44,12 +44,12 @@ public class UserController {
     }
 
     @PostMapping("/create/million")
-    public void createMillionUsers(){
+    public void createMillionUsers() {
         for (int i = 0; i < 1000; i++) {
             userService.createUser(
                     new User(
                             null,
-                            "asd"+i+"@mail.ru",
+                            "asd" + i + "@mail.ru",
                             "asdassddas",
                             "asdsad",
                             "asdsda",
