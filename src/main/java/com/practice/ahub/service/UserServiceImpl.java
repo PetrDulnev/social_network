@@ -11,6 +11,7 @@ import com.practice.ahub.repository.UserProfileRepository;
 import com.practice.ahub.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     UserProfileRepository profileRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, UserProfileRepository profileRepository) {
+    public UserServiceImpl(@Qualifier("jdbc") UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, UserProfileRepository profileRepository) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;

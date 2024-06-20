@@ -3,6 +3,7 @@ package com.practice.ahub.conroller;
 import com.practice.ahub.exception.CustomException;
 import com.practice.ahub.jwt.JwtRequest;
 import com.practice.ahub.jwt.JwtResponse;
+import com.practice.ahub.model.Role;
 import com.practice.ahub.model.User;
 import com.practice.ahub.service.UserService;
 import jakarta.annotation.security.PermitAll;
@@ -40,5 +41,21 @@ public class UserController {
                         String.format("user with id = %s not found", id)
                 )
         );
+    }
+
+    @PostMapping("/create/million")
+    public void createMillionUsers(){
+        for (int i = 0; i < 1000; i++) {
+            userService.createUser(
+                    new User(
+                            null,
+                            "asd"+i+"@mail.ru",
+                            "asdassddas",
+                            "asdsad",
+                            "asdsda",
+                            Role.USER
+                    )
+            );
+        }
     }
 }
