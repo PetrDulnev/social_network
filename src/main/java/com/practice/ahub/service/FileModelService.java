@@ -11,10 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileModelService {
 
     public void isValidFile(MultipartFile file) {
-        if (file != null && file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty()){
+        if (file != null && file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty()) {
             try {
                 AccessFileExtension.valueOf(file.getContentType().split("/")[1].toUpperCase());
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 throw new CustomException("unsupported file format");
             }
         }

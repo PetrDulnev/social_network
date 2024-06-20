@@ -3,7 +3,6 @@ package com.practice.ahub.service.posts;
 import com.practice.ahub.model.Post;
 import com.practice.ahub.model.UserProfile;
 import com.practice.ahub.repository.PostRepository;
-import com.practice.ahub.repository.PostSortingRepository;
 import com.practice.ahub.repository.UserProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,11 +16,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserProfileRepository userProfileRepository;
-    private final PostSortingRepository postSortingRepository;
 
     @Override
     public Optional<Post> getPostById(Long id) {
@@ -44,6 +42,6 @@ public class PostServiceImpl implements PostService{
     @Override
     public Page<Post> getAllPosts(Integer page, Integer size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        return postSortingRepository.findAll(pageable);
+        return postRepository.findAll(pageable);
     }
 }

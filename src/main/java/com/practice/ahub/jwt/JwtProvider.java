@@ -22,7 +22,7 @@ import java.util.HashMap;
 @Slf4j
 public class JwtProvider {
     private final String secret =
-                    "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJ";
+            "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJ";
     SecretKeySpec key = new
             SecretKeySpec(secret.getBytes(), "HmacSHA256");
 
@@ -53,10 +53,9 @@ public class JwtProvider {
         return (Claims) parser.parse(token).getPayload();
     }
 
-    public boolean isValidToken (String token) {
+    public boolean isValidToken(String token) {
         Date deadTime = getClaimsFromToken(token).getExpiration();
-        if ((token != null) && !deadTime.before(new Date(System.currentTimeMillis())))
-        {
+        if ((token != null) && !deadTime.before(new Date(System.currentTimeMillis()))) {
             return true;
         } else {
             throw new CustomException("Expired or invalid JWT token");

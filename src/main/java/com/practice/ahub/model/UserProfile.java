@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "users_profile")
 @Builder
 @NamedEntityGraph(
-            name = "UserProfile.eagerlyFetchUser",
+        name = "UserProfile.eagerlyFetchUser",
         attributeNodes = {
                 @NamedAttributeNode("user"),
                 @NamedAttributeNode("profileImage"),

@@ -25,7 +25,7 @@ public class PostController {
     @GetMapping
     public Page<Post> getPosts(@RequestParam(defaultValue = "0") Integer page,
                                @RequestParam(defaultValue = "10") Integer size,
-                               @RequestParam(defaultValue = "id") String sortBy){
+                               @RequestParam(defaultValue = "id") String sortBy) {
         return postService.getAllPosts(page, size, sortBy);
     }
 

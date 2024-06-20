@@ -41,13 +41,13 @@ public class UserProfileController {
 
     @GetMapping
     @PermitAll
-    public  UserProfile getByEmail(@RequestParam(value = "email") String email){
+    public UserProfile getByEmail(@RequestParam(value = "email") String email) {
         return profileService.getbyemail(email);
     }
 
     @GetMapping("/{link}")
     @PermitAll
-    public UserProfile getByLink(@PathVariable String link){
+    public UserProfile getByLink(@PathVariable String link) {
         return profileService.getByLink(link);
     }
 }
