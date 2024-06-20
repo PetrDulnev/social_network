@@ -9,8 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties(MinioProperties.class)
 public class AhubApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AhubApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AhubApplication.class, args);
+    }
 
 }
