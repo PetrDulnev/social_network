@@ -7,15 +7,15 @@ import com.practice.ahub.jwt.JwtService;
 import com.practice.ahub.model.Role;
 import com.practice.ahub.model.User;
 import com.practice.ahub.model.UserProfile;
-import com.practice.ahub.repository.UserProfileRepository;
 import com.practice.ahub.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -26,18 +26,19 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     JwtService jwtService;
     PasswordEncoder passwordEncoder;
-    UserProfileRepository profileRepository;
+    UserProfileService userProfileService;
 
     @Autowired
-    public UserServiceImpl(@Qualifier("jdbc") UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, UserProfileRepository profileRepository) {
+    public UserServiceImpl(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, UserProfileService userProfileService) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
-        this.profileRepository = profileRepository;
+        this.userProfileService = userProfileService;
         log.info("this is {}", userRepository.getClass());
     }
 
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public User createUser(User user) {
         user.setPassword(cryptPassword(user.getPassword()));
         user.setRole(Role.USER);
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
                 .link(String.valueOf(savedUSer.getId()))
                 .user(user)
                 .build();
-        profileRepository.save(profile);
+        userProfileService.saveUserProfile(profile);
         return savedUSer;
     }
 

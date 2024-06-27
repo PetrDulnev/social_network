@@ -24,6 +24,7 @@ management:
       exposure:
         include: prometheus
 
+
 minio:
   accessKey: admin
   secretKey: StrongAdmin
@@ -36,3 +37,14 @@ server:
 springdoc:
   api-docs:
     path: /api-doc
+logging:
+  level:
+    org:
+      springframework:
+        transaction:
+          interceptor: TRACE
+    com:
+      zaxxer:
+        hikari:
+          pool:
+            HikariPool: DEBUG

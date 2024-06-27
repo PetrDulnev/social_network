@@ -21,16 +21,11 @@ public class UserProfileController {
 
     @PatchMapping("/image")
     @Secured("USER")
-    public UserProfile setProfileImage(Principal principal, @RequestPart("file") MultipartFile file) {
+    public UserProfile setProfileImage(Principal principal,
+                                       @RequestPart("file") MultipartFile file,
+                                       @RequestParam String point) {
         fileModelService.isValidFile(file);
-        return profileService.setProfileImage(principal, file);
-    }
-
-    @PatchMapping("/banner")
-    @Secured("USER")
-    public UserProfile setBannerImage(Principal principal, @RequestPart("file") MultipartFile file) {
-        fileModelService.isValidFile(file);
-        return profileService.setBannerImage(principal, file);
+        return profileService.setNewProfileImage(principal, file, point);
     }
 
     @PutMapping
