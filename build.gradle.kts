@@ -22,8 +22,6 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework:spring-messaging:6.1.10")
-	implementation("org.springframework:spring-websocket:6.1.10")
 	implementation("io.minio:minio:8.5.10")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	testImplementation("org.testcontainers:testcontainers:1.19.7")

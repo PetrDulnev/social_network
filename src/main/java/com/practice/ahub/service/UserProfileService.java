@@ -23,7 +23,7 @@ public class UserProfileService {
     private final MinioService minioService;
 
     @Transactional
-    public UserProfile setNewProfileImage(Principal principal, MultipartFile file, String point) {
+    public UserProfile setNewProfileImage(Principal principal, MultipartFile file, String attribute) {
         UserProfile profile = userProfileRepository.findByUserEmail(principal.getName());
 
         String fileName = minioService.save(file);
@@ -35,7 +35,7 @@ public class UserProfileService {
                 .build();
 
         try {
-            switch (point) {
+            switch (attribute) {
                 case "background":
                     profile.setBannerImage(fileModelRepository.save(fileModel));
                     break;

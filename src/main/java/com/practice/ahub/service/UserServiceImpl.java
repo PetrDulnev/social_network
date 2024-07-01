@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -23,10 +22,10 @@ import java.util.Optional;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    UserRepository userRepository;
-    JwtService jwtService;
-    PasswordEncoder passwordEncoder;
-    UserProfileService userProfileService;
+    private final UserRepository userRepository;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+    private final UserProfileService userProfileService;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, UserProfileService userProfileService) {
@@ -38,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional
     public User createUser(User user) {
         user.setPassword(cryptPassword(user.getPassword()));
         user.setRole(Role.USER);

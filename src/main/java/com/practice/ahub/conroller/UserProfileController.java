@@ -23,9 +23,9 @@ public class UserProfileController {
     @Secured("USER")
     public UserProfile setProfileImage(Principal principal,
                                        @RequestPart("file") MultipartFile file,
-                                       @RequestParam String point) {
+                                       @RequestParam String attribute) {
         fileModelService.isValidFile(file);
-        return profileService.setNewProfileImage(principal, file, point);
+        return profileService.setNewProfileImage(principal, file, attribute);
     }
 
     @PutMapping
